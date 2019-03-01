@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html style="background-color:#000000;">
+<center><body background="background_virtual_pet_page1.jpg"></center>
+
+<title> Vivek's Virtual Pet</title>
+
+<center><form>
+<textarea rows="1" cols="50" style="background:black; font-family:Ravie; color:red; font-size:20px; text-align:left;">Welcome to the World of Mario! The Magnificent...</textarea><br>
+<textarea rows="1" cols="38" style="background:black; font-family:Times New Roman; color:red; font-size:20px; text-align:left;">Read the Pet Manual before beginning!</textarea><br>
+<p style="background:black; font-family:Times New Roman; color:red; font-size:20px;"> Link to <a href="https://www.cs.drexel.edu/~vck29/petinstructions.html">Pet Manual</a></p>
+</form></center>
+<script>
+
+
+var state = 0;
+function ChangeStates(){														//Used in other functions to display the new state based on the combination of existing state and stimuli.
+CallTimeout();
+	if(state == 0){																//Relaxed
+		document.getElementById("MyPet").src="dragon_relaxed1.png";
+		document.getElementById("MyPet").alt="Dragon Relaxed";
+		document.getElementById("statedisplay").innerHTML="Relaxed";
+		}
+		
+	else if(state == 1){														//Happy
+		document.getElementById("MyPet").src="dragon_happy1.png";
+		document.getElementById("MyPet").alt="Dragon Happy";
+		document.getElementById("statedisplay").innerHTML="Happy";
+		}
+		
+	else if(state == 2){														//Angry
+		document.getElementById("MyPet").src="dragon_angry1.png";
+		document.getElementById("MyPet").alt="Dragon Angry";
+		document.getElementById("statedisplay").innerHTML="Angry";
+		}
+		
+	else if(state == 3){														//MORE Angry
+		document.getElementById("MyPet").src="dragon_more_angry1.png";
+		document.getElementById("MyPet").alt="Dragon MORE Angry";
+		document.getElementById("statedisplay").innerHTML="MORE Angry";
+		setTimeout(MoreAngryOrHungry,5000);
+		
+		}
+	else if(state == 4){														//Hungry
+		document.getElementById("MyPet").src="dragon_hungry1.png";
+		document.getElementById("MyPet").alt="Dragon Hungry";
+		document.getElementById("statedisplay").innerHTML="Hungry";
+		}
+		
+	else if(state == 5){														//MORE Hungry
+		document.getElementById("MyPet").src="dragon_more_hungry1.png";
+		document.getElementById("MyPet").alt="Dragon MORE Hungry";
+		document.getElementById("statedisplay").innerHTML="MORE Hungry";
+		setTimeout(MoreAngryOrHungry,5000);
+		}
+		
+	else if(state == 6){														//Sleepy
+		document.getElementById("MyPet").src="dragon_sleepy1.png";
+		document.getElementById("MyPet").alt="Dragon Sleepy";
+		document.getElementById("statedisplay").innerHTML="Sleepy";
+		}
+		
+	}
+	
+function Inactivity(){															//Executed in case of Timeout.
+var x;
+if(state==0){
+		x = Math.random();
+		if (x > 0.5) {
+			state = 1;
+			StopTimeout();
+			ChangeStates();
+				}
+		else if (x < 0.5) {
+			state = 4;
+			StopTimeout();
+			ChangeStates();
+				}
+	}
+else if(state==1){
+	state=0;
+	StopTimeout();
+	ChangeStates();
+	}
+else if(state==2){
+	x=Math.random();
+		if (x > 0.5){
+			state=3;
+			StopTimeout();
+			ChangeStates();
+			}
+		else if(x<0.5){
+			state=6;
+			StopTimeout();
+			ChangeStates();
+			}
+	}
+else if(state==4){
+	state=5;
+	StopTimeout();
+	ChangeStates();
+	}
+
+else if(state==6){
+	x=Math.random();
+		if(x>0.5){
+			state=1;
+			StopTimeout();
+			ChangeStates();
+			}
+		else if(x<0.5){
+			state=4;
+			StopTimeout();
+			ChangeStates();
+			}
+	}
+}
+
+function MoreAngryOrHungry(){										//Executed when Mario becomes MORE Angry or MORE Hungry.
+		document.getElementById("MyPet").src="morehungryorangry1.png";
+		document.getElementById("MyPet").alt="You are Dead";
+		document.getElementById("statedisplay").innerHTML="You tested my patience to the EXTREME! You're DEAD... RELOAD the page to enter my world again!";
+}
+
+
+function Pet(){														//Executed when the user selects Pet Action.
+if(state==0){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+else if(state==1){
+state=6;
+StopTimeout();
+ChangeStates();
+}
+else if(state==2){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+else if(state==4){
+state=5;
+StopTimeout();
+ChangeStates();
+}
+else if(state==6){
+state=0;
+StopTimeout();
+ChangeStates();
+}
+}
+
+function Feed(){												//Executed when the user selects Feed Action.
+if(state==0){
+state=6;
+StopTimeout();
+ChangeStates();
+}
+else if(state==1){
+state=6;
+StopTimeout();
+ChangeStates();
+}
+else if(state==2){
+state=0;
+StopTimeout();
+ChangeStates();
+}
+else if(state==4){
+state=0;
+StopTimeout();
+ChangeStates();
+}
+else if(state==6){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+}
+
+function Hit(){												//Executed when the user selects Hit Action.
+if(state==0){
+state=2;
+StopTimeout();
+ChangeStates();
+}
+else if(state==1){
+state=2;
+StopTimeout();
+ChangeStates();
+}
+else if(state==2){
+state=3;
+StopTimeout();
+ChangeStates();
+}
+else if(state==4){
+state=2;
+StopTimeout();
+ChangeStates();
+}
+else if(state==6){
+state=2;
+StopTimeout();
+ChangeStates();
+}
+}
+
+function WaterSplash(){									//Executed when the user selects WaterSplash Action.
+if(state==0){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+else if(state==1){
+state=2;
+StopTimeout();
+ChangeStates();
+}
+else if(state==2){
+state=3;
+StopTimeout();
+ChangeStates();
+}
+else if(state==4){
+state=5;
+StopTimeout();
+ChangeStates();
+}
+else if(state==6){
+state=2;
+StopTimeout();
+ChangeStates();
+}
+}
+
+function Play(){									//Executed when the user selects Play Action.
+if(state==0){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+else if(state==1){
+state=6;
+StopTimeout();
+ChangeStates();
+}
+else if(state==2){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+else if(state==4){
+state=5;
+StopTimeout();
+ChangeStates();
+}
+else if(state==6){
+state=1;
+StopTimeout();
+ChangeStates();
+}
+}
+var MyVar;
+function CallTimeout(){
+MyVar=setTimeout(Inactivity,7000);
+}
+
+function StopTimeout(){
+clearTimeout(MyVar);
+}
+
+	
+</script>
+<center><img id="MyPet" height="400" width="400" src="dragon_relaxed1.png"></center>
+<center><h2 style="color:White;">Press Any Button to Begin</h2></center>
+<center><p style="color:White; font-size:30px;"><b><i><u>State:</u></i></b></p><p id="statedisplay" style="color:White; font-size:35px;">Relaxed</p></center>
+<center>
+<input type="button" style="width:80px;height:40px;" onclick="Pet();" id="pet" value="Pet">
+<input type="button" style="width:80px;height:40px;" onclick="Feed();" id="feed" value="Feed">
+<input type="button" style="width:80px;height:40px;" onclick="Hit();" id="hit" value="Hit">
+<input type="button" style="width:100px;height:40px;" onclick="WaterSplash();" id="watersplash" value="Water Splash">
+<input type="button" style="width:80px;height:40px;" onclick="Play();" id="play" value="Play">
+</center>
+
+</body>
+</html>
